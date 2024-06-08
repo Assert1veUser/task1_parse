@@ -63,7 +63,7 @@ async function getDataText(url) {
 
             })
         }
-        return employeeList;
+        return [employeeList, photoURLs];
     } catch (error) {
         console.error(error);
         throw new Error('Failed to extract subheadings');
@@ -140,5 +140,23 @@ async function convertCSV() {
         .then(() => console.log(`CSV файл сохранен по пути: ${csvFilePath}`))
         .catch(error => console.error(`Ошибка при записи CSV файла: ${error}`));
 }
+
+// async function getData() {
+//     deleteAllFilesInDirectory(outputDirectory);
+//     await getDataText('https://cemp.msk.ru/company/staff/');
+//     await downloadAndSavePhotos(photoURLs);
+//     convertJSON();
+//     convertCSV();
+// }
+//downloadAndSavePhotos(photoURLs);
+//convertCSV();
+//convertJSON();
+
+// getDataText('https://cemp.msk.ru/company/staff/').then(employeeList => {
+//     console.log(employeeList);
+// }).catch(error => {
+//     console.error(error);
+// });
+
 
 module.exports = {getDataText, downloadAndSavePhotos, convertCSV, convertJSON};

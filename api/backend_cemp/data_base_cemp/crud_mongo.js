@@ -21,7 +21,7 @@ const addEmployee = async () =>{
     try {
         const {getDataText} = require('../back')
         await getDataText('https://cemp.msk.ru/company/staff/').then(employeeList => {
-            employee = employeeList.slice();
+            employee = employeeList[0].slice();
         }).catch(error => {
             console.error(error);
         });
