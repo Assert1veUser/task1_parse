@@ -1,0 +1,22 @@
+version: '3.8'
+
+services:
+  app:
+    build: ./api/
+    ports:
+      - 8080:8080
+
+  mongo:
+    image: mongo
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: admin
+      MONGO_INITDB_DATABASE: employee
+    ports:
+      - 27017:27017
+    volumes:
+      - ./mongo:/data/db
+      - ./mongo/initDB.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
+
+
+
