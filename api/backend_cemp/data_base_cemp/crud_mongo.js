@@ -1,5 +1,5 @@
 const {MongoClient: MongoClient} = require('mongodb')
-const MongoDBclient = new MongoClient('mongodb://127.0.0.1:27017')
+const MongoDBclient = new MongoClient('mongodb://admin:admin@task1_parse-master-mongo-1:27017')
 const { ObjectId } = require('mongodb');
 let employee = [];
 const selectEmployee = async () =>{
