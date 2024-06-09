@@ -34,7 +34,7 @@ module.exports = function(app, db) {
         }).catch(error => {
             console.error(error);
         });
-        downloadAndSavePhotos(photoUrl);
+        await downloadAndSavePhotos(photoUrl);
         const archive = archiver('zip', {
             zlib: {level: 9}
         });
@@ -47,28 +47,28 @@ module.exports = function(app, db) {
         archive.directory(photosFolder, false);
         archive.finalize();
     });
-    app.get('/convert_csv', (req, res) => {
-        convertCSV();
+    app.get('/convert_csv', async (req, res) => {
+        await convertCSV();
         const archive = archiver('zip', {
-            zlib: { level: 9 }
+            zlib: {level: 9}
         });
         res.set('Content-Type', 'application/zip');
         res.set('Content-Disposition', 'attachment; filename=employee_csv.zip');
-        res.on('close', function() {
+        res.on('close', function () {
             console.log('Архив закрыт.');
         });
         archive.pipe(res);
         archive.directory(csvFolder, false);
         archive.finalize();
     });
-    app.get('/convert_json', (req, res) => {
-        convertJSON();
+    app.get('/convert_json', async (req, res) => {
+        await convertJSON();
         const archive = archiver('zip', {
-            zlib: { level: 9 }
+            zlib: {level: 9}
         });
         res.set('Content-Type', 'application/zip');
         res.set('Content-Disposition', 'attachment; filename=employee_json.zip');
-        res.on('close', function() {
+        res.on('close', function () {
             console.log('Архив закрыт.');
         });
         archive.pipe(res);

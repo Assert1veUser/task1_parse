@@ -79,7 +79,7 @@ function getInfoEmployee(id, $, className) {
             if (employeeinfo.length > 0) {
                 employeeinfo.each((index, el) => {
                     const text = $(el).text().replace(re, " ");
-                    list.push(text);
+                    infoList.push(text);
                 });
             } else {
                 infoList.push('');
