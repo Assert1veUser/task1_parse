@@ -11,7 +11,7 @@ services:
     environment:
       MONGO_INITDB_ROOT_USERNAME: admin
       MONGO_INITDB_ROOT_PASSWORD: admin
-      MONGO_INITDB_DATABASE: employee
+      MONGO_INITDB_DATABASE: cemp_employee
     ports:
       - 27017:27017
     volumes:

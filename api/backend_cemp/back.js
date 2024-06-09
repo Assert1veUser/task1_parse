@@ -39,8 +39,8 @@ async function getDataText(url) {
         })
         listId = Array.from(ids);
         for (let i = 0; i < listId.length; i++) {
-            newListFullName.push(getFullNameEmployee(listId[i], url, response, $, '.item-title'));
-            newListPosition.push(getFullNameEmployee(listId[i], url, response, $, '.semibold'));
+            newListFullName.push(getInfoEmployee(listId[i], $, '.item-title'));
+            newListPosition.push(getInfoEmployee(listId[i], $, '.semibold'));
 
         }
 
@@ -70,22 +70,22 @@ async function getDataText(url) {
     }
 }
 
-function getFullNameEmployee(id, url, response, $, className) {
+function getInfoEmployee(id, $, className) {
     try {
-        const list = [];
+        const infoList = [];
 
         $('.item[id*="_' + id + '_"]').each((index, element) => {
-            const employeeFullName = $(element).find(className);
-            if (employeeFullName.length > 0) {
-                employeeFullName.each((index, el) => {
+            const employeeinfo = $(element).find(className);
+            if (employeeinfo.length > 0) {
+                employeeinfo.each((index, el) => {
                     const text = $(el).text().replace(re, " ");
-                    list.push(text.length > 0 ? text : '');
+                    list.push(text);
                 });
             } else {
-                list.push('');
+                infoList.push('');
             }
         })
-        return list
+        return infoList
     } catch (error) {
         console.error(error);
         throw new Error('Failed to extract subheadings');
@@ -100,7 +100,7 @@ async function downloadAndSavePhotos(urls) {
         const filename = ''+ employeeList[i].fullName.split(' ')[0] + '.jpg';
         try {
             const response = await axios.get(url, { responseType: 'arraybuffer' });
-            const filePath = path.join(outputDirectory, filename); // Путь к файлу в папке res_photo`
+            const filePath = path.join(outputDirectory, filename);
             fs.writeFileSync(filePath, response.data, 'binary');
             console.log(`Фотография ${filename} сохранена в папку res.`);
         } catch (error) {
@@ -121,13 +121,11 @@ function deleteAllFilesInDirectory(directoryPath) {
 
 async function convertJSON() {
     await getDataText('https://cemp.msk.ru/company/staff/');
-    deleteAllFilesInDirectory(outputDirectoryJSON);
     const jsonEmployee = JSON.stringify(employeeList);
     fs.writeFileSync(jsonFilePath, jsonEmployee);
 }
 async function convertCSV() {
     await getDataText('https://cemp.msk.ru/company/staff/');
-    deleteAllFilesInDirectory(outputDirectoryCSV);
     const csvWriter = createCsvWriter({
         path: csvFilePath,
         header: [
