@@ -24,3 +24,29 @@ db.createCollection("employee", {
         }
     }
 })
+db.createCollection("employee_sokol", {
+    validator: {
+        $jsonSchema: {
+            bsonType: 'object',
+            required: [
+                'fullName',
+                'post',
+                'specialization',
+                'experience'
+            ],
+            properties: {
+                full_name: {
+                },
+                post: {
+                    bsonType: 'string'
+                },
+                specialization: {
+                    bsonType: 'string'
+                },
+                experience: {
+                    bsonType: 'string'
+                }
+            }
+        }
+    }
+})

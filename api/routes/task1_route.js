@@ -5,7 +5,7 @@ const path = require('path');
 const photosFolder = path.join(__dirname, '../backend_cemp/res_photo');
 const csvFolder = path.join(__dirname, '../backend_cemp/res_csv');
 const jsonFolder = path.join(__dirname, '../backend_cemp/res_json');
-let photoUrl = [];
+s
 module.exports = function(app, db) {
     const bodyParser = require('body-parser');
     app.use(bodyParser.json());

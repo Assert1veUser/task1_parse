@@ -1,8 +1,9 @@
 class EmployeeSokol {
-    constructor(fullName, position, department) {
+    constructor(fullName, post, specialization, experience) {
         this.fullName = fullName;
-        this.position = position;
-        this.department = department;
+        this.post = post;
+        this.specialization = specialization;
+        this.experience = experience;
     }
 }
 
